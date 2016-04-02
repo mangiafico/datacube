@@ -15,6 +15,8 @@ public class Observation {
 	Observation(Model model, String name) {
 		resource = model.createResource(model.ns + name);
 		resource.addProperty(RDF.type, ResourceFactory.createResource(uri));
+		Property dataset = ResourceFactory.createProperty(DataCube.uri + "dataSet");
+		resource.addProperty(dataset, model.getDataset());
 	}
 	
 	public Observation setDimension(Dimension dimension, String value) {

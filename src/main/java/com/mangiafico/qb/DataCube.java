@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
+import org.apache.jena.vocabulary.XSD;
 
 public class DataCube {
 	
@@ -21,9 +22,10 @@ public class DataCube {
 	public DataCube(String prefix, String ns) {
 		model = new Model(ns);
 		model.setNsPrefix(DataCube.prefix, DataCube.uri);
-		model.setNsPrefix("rdf", RDF.uri);
-		model.setNsPrefix("rdfs", RDFS.uri);
+		model.setNsPrefix("rdf", RDF.getURI());
+		model.setNsPrefix("rdfs", RDFS.getURI());
 		model.setNsPrefix("dct", DCTerms.getURI());
+		model.setNsPrefix("xsd", XSD.getURI());
 		model.setNsPrefix(prefix, ns);
 	}
 	
@@ -45,8 +47,8 @@ public class DataCube {
 	}
 	
 	private int dimensions = 0;
-	public Dimension addDimention(String name) {
-		Dimension dim = new Dimension(model, name);
+	public Dimension addDimention(String name, Resource range) {
+		Dimension dim = new Dimension(model, name, range);
 		dimensions += 1;
 		Resource entry = model.createResource();
 		entry.addProperty(ResourceFactory.createProperty(DataCube.uri + "dimension"), ResourceFactory.createResource(dim.getURI()));

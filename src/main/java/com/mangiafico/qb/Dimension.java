@@ -11,10 +11,11 @@ public class Dimension {
 	
 	private final Resource resource;
 	
-	Dimension(Model model, String name) {
+	Dimension(Model model, String name, Resource range) {
 		resource = model.createResource(model.ns + name);
 		resource.addProperty(RDF.type, RDF.Property);
 		resource.addProperty(RDF.type, ResourceFactory.createResource(uri));
+		resource.addProperty(RDFS.range, range);
 	}
 	
 	String getURI() {

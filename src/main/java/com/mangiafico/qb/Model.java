@@ -1,5 +1,6 @@
 package com.mangiafico.qb;
 
+import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
@@ -26,6 +27,8 @@ class Model extends ModelCom {
 		dataset.addProperty(RDF.type, ResourceFactory.createResource(DataCube.uri + "DataSet"));
 		dsd = createResource(ns + "dsd");
 		dsd.addProperty(RDF.type, ResourceFactory.createResource(DataCube.uri + "DataStructureDefinition"));
+		Property structure = ResourceFactory.createProperty(DataCube.uri + "structure");
+		dataset.addProperty(structure, dsd);
 	}
 	
 	ResIterator getDimensions() {
